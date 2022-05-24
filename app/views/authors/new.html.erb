@@ -1,0 +1,15 @@
+<% currently_at 'Authors' %>
+<div class="container-sm">
+  <h1 class="mb-4">New author</h1>
+  <%= form_tag({:action => 'create'}, multipart: true) do %>
+    <div class="mb-3 row">
+      <div class="col-sm-2 col-form-label">
+        <label for = "author_name">Author name:</label>
+      </div>
+      <div class="col-sm-5">
+        <%= text_field 'author', 'name', required: true, class: 'form-control form-control-lg' %>
+      </div>
+    </div>
+    <%= submit_tag "Create", class: 'btn btn-primary btn-md' %>
+  <% end %>
+</div>

@@ -1,0 +1,27 @@
+<% if policy(@genres).index? %>
+  <% provide :page_title, 'Genres' %>
+  <% currently_at 'Genres' %>
+  <h1 class="mb-4">Genres:</h1>
+  <div class="row row-cols-1 row-cols-md-5 g-4 mb-4">
+    <% @genres.each do |genres| %>
+      <div class="col">
+        <div class="card" style="width: 300px;">
+          <h2 class="mb-4 card-header"><%= genres.name %></h2>
+          <div class="card-body">
+            <%= link_to "Show", genre_path(genres), class: 'btn btn-secondary btn-sm', :method => :get %>
+            <% if policy(genres).edit? %>
+              <%= link_to "Edit",  edit_genre_path(genres), class: 'btn btn-secondary btn-sm', :method => :get %>
+            <% end %>
+            <% if policy(genres).destroy? %>
+              <%= link_to "Destroy", genre_path(genres), class: 'btn btn-danger btn-sm', data: {method: :delete, confirm: "Are you sure?"} %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <% if policy(@genres).create? %>
+    <%= button_to "Add new genre", new_genre_path, :id => "open-contacts-dialog-btn",
+    :class => 'btn btn-primary btn-md', :method => :get %>
+  <% end %>
+<% end %>

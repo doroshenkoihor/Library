@@ -1,0 +1,8 @@
+<% currently_at 'Home' %>
+<p>
+  <%= image_tag @book.picture, class:"img-thumbnail", :style => "width: 500px" %>
+</p>
+<h1 class="mb-4"><%= @book.name %></h1>
+<h3 class="mb-4">Authors: 
+  <%= @book.authors.map { |author| link_to author.name, author }.join(', ').html_safe %>
+</h3>

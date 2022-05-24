@@ -1,0 +1,40 @@
+<% currently_at 'Home' %>
+<div class="container-sm">
+  <h1 class="mb-4">Add new book</h1>
+  <%= form_tag({:action => 'create'}, multipart: true) do %>
+    <div class="mb-3 row">
+      <div class="col-sm-2 col-form-label">
+        <label for = "book_name">Book name:</label>
+      </div>
+      <div class="col-sm-10">
+        <%= text_field 'book', 'name', required: true, class: 'form-control form-control-lg' %>
+      </div>
+    </div>
+    <div class="mb-3 row">
+      <div class="col-sm-2 col-form-label">
+        <label for = "book_genre_id">Genres:</label>
+      </div>
+      <div class="col-sm-10">
+        <%= collection_select(:book, :genre_id, @genres, :id, :name, { required: true }, { class: 'form-control form-control-lg' }) %>
+      </div>
+    </div>
+    <div class="mb-3 row">
+      <div class="col-sm-2 col-form-label">
+        <label for = "author_ids">Authors:</label>
+      </div>
+      <div class="col-sm-10">
+        <%= collection_select(:book, :author_ids, @authors, :id, :name, {}, { multiple: true, required: true, class: 'form-control form-control-lg' }) %>
+      </div>
+    </div>
+    <div class="mb-3 row">
+      <div class="col-sm-2 col-form-label">
+        <label>Photo:</label>
+      </div>
+      <div class="col-sm-10">
+        <%= file_field 'book', 'picture', required: true, class: 'form-control' %>
+      </div>
+    </div>
+    <%= submit_tag "Create", class: 'btn btn-primary btn-md' %>
+  <% end %>
+  <%= link_to 'Back to library', {:action => 'index'} %>
+</div>

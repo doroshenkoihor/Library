@@ -1,0 +1,39 @@
+<% provide :page_title, 'Books' %>
+<% currently_at 'Home' %>
+<h1 class="mb-4">Welcome, to library</h1>
+<p>These are the current books in our system</p>
+<p>
+  <% if policy(Book).create? %>
+    <%= button_to "Add new book", new_book_path, :id => "open-contacts-dialog-btn",
+    :class => 'btn btn-primary btn-md', :method => :get %>
+  <% end %>
+</p>
+<% @books_by_genres.each do |genre| %>
+  <% next unless genre[:books].present? %>
+  <div class="mb-4">
+    <h2 class="mb-4"><%= genre[:name] %></h2>
+    <div class="row row-cols-1 row-cols-md-5 g-4 mb-4">
+      <% genre[:books].each do |book| %>
+        <div class="col">
+          <div class="card" style="max-width: 400px;">
+            <% if book.picture.present? %>
+              <%= image_tag book.picture, class:"card-img-top", size: "460x280", style: "object-fit: contain;" %>
+            <% end %>
+            <div class="card-body">
+              <h5 class="mb-3"><%= book.name %></h5>
+              <div>
+                <%= link_to "Show", book_path(book), class: 'btn btn-secondary btn-sm', :method => :get %>
+                <% if policy(book).edit? %>
+                  <%= link_to "Edit",  edit_book_path(book), class: 'btn btn-secondary btn-sm', :method => :get %>
+                <% end %>
+                <% if policy(book).destroy? %>
+                  <%= link_to "Destroy", book_path(book), class: 'btn btn-danger btn-sm', data: {method: :delete, confirm: "Are you sure?"} %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>

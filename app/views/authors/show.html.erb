@@ -1,0 +1,5 @@
+<% currently_at 'Authors' %>
+<h1 class="mb-4"><%= @author.name%></h1>
+<h2 class="mb-4">Books:
+  <%= @author.books.map { |book| link_to book.name, book }.join(', ').html_safe %>
+</h2>

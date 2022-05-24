@@ -1,0 +1,5 @@
+<% currently_at 'Genres' %>
+<h1 class="mb-4"><%= @genre.name%></h1>
+<h2 class="mb-4">Books:
+  <%= @genre.books.map { |book| link_to book.name, book }.join(', ').html_safe %>
+</h2>

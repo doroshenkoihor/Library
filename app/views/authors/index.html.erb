@@ -1,0 +1,25 @@
+<% provide :page_title, 'Authors' %>
+<% currently_at 'Authors' %>
+<h1 class="mb-4">Authors:</h1>
+<div class="row row-cols-1 row-cols-md-5 g-4 mb-4">
+  <% @authors.each do |author| %>
+    <div class="col">
+      <div class="card" style="width: 300px;">
+        <h2 class="mb-4 card-header"><%= author.name %></h2>
+        <div class="card-body">
+          <%= link_to "Show", author_path(author), class: 'btn btn-secondary btn-sm', :method => :get %>
+          <% if policy(author).edit? %>
+            <%= link_to "Edit", edit_author_path(author), class: 'btn btn-secondary btn-sm', :method => :get %>
+          <% end %>
+          <% if policy(author).destroy? %>
+            <%= link_to "Destroy", author_path(author), class: 'btn btn-danger btn-sm', data: {method: :delete, confirm: "Are you sure?"} %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+<% if policy(@authors).create? %>
+  <%= button_to "Add new author", new_author_path, :id => 'open-contacts-dialog-btn',
+  class: 'btn btn-primary', :method => :get %>
+<% end %>

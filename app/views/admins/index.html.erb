@@ -1,0 +1,22 @@
+<% provide :page_title, 'Admins' %>
+<% currently_at 'Admins' %>
+<h1 class="mb-4">Admins:</h1>
+<div class="row row-cols-1 row-cols-md-5 g-4 mb-4">
+  <% @admins.each do |admin| %>
+    <div class="col">
+      <div class="card" style="width: 300px;">
+        <h2 class="mb-2 card-header"><%= admin.name %></h2>
+        <div class="mb-1 card-body">
+          <div class="mb-2">
+            <div>Email: <%= admin.email %></div>
+            <div>Role: <%= admin.role.humanize %></div>
+          </div>
+          <%= link_to "Edit",  edit_admin_path(admin), class: 'btn btn-secondary btn-sm', :method => :get %>
+          <%= link_to "Destroy", admin_path(admin), class: 'btn btn-danger btn-sm', data: {method: :delete, confirm: "Are you sure?"} %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+<%= button_to "Add new admin", new_admin_path, :id => "open-contacts-dialog-btn",
+          :class => 'btn btn-primary btn-md', :method => :get %>

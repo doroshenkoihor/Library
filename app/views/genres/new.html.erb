@@ -1,0 +1,15 @@
+<% currently_at 'Genres' %>
+<div class="container-sm">
+  <h1 class="mb-4">New genre</h1>
+  <%= form_tag({:action => 'create'}, multipart: true) do %>
+    <div class="mb-3 row">
+      <div class="col-sm-2 col-form-label">
+        <label for = "genre_name">Genre name:</label>
+      </div>
+      <div class="col-sm-10">
+        <%= text_field 'genre', 'name', required: true%>
+      </div>
+    </div>
+    <%= submit_tag "Create", class: 'btn btn-primary btn-md' %>
+  <% end %>
+</div>
